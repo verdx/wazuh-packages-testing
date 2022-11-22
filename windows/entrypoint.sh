@@ -14,7 +14,7 @@ URL_REPO=https://github.com/wazuh/wazuh/archive/${BRANCH}.zip
 wget -O wazuh.zip ${URL_REPO} && unzip wazuh.zip
 
 # Compile the wazuh agent for Windows
-FLAGS="-j ${JOBS} "
+FLAGS="-j ${JOBS} EXTERNAL_SRC_ONLY=yes"
 
 if [[ "${DEBUG}" = "yes" ]]; then
     FLAGS+="-d "
@@ -22,6 +22,9 @@ fi
 
 make -C /wazuh-*/src deps TARGET=winagent ${FLAGS}
 make -C /wazuh-*/src TARGET=winagent ${FLAGS}
+
+tar -zcf sqlite.tar.gz /wazuh-*/src/external/sqlite --owner=0 --group=0
+cp sqlite.tar.gz /shared
 
 rm -rf /wazuh-*/src/external
 
