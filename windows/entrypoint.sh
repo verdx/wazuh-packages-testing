@@ -14,7 +14,7 @@ URL_REPO=https://github.com/wazuh/wazuh/archive/${BRANCH}.zip
 wget -O wazuh.zip ${URL_REPO} && unzip wazuh.zip
 
 # Compile the wazuh agent for Windows
-FLAGS="-j ${JOBS} EXTERNAL_SRC_ONLY=yes"
+FLAGS="-j ${JOBS}"
 
 if [[ "${DEBUG}" = "yes" ]]; then
     FLAGS+="-d "
